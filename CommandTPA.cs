@@ -18,72 +18,17 @@ namespace RocketMod_TPA
         private Dictionary<CSteamID, DateTime> coolDown = new Dictionary<CSteamID, DateTime>();
         private Dictionary<CSteamID, byte> health = new Dictionary<CSteamID, byte>();
 
-        public bool AllowFromConsole
-        {
-            get
-            {
-                return false;
-            }
-        }
+        public List<string> Permissions => new List<String>() { "CommandTPA.tpa" };
 
-        public List<string> Permissions
-        {
-            get
-            {
-                return new List<string>()
-                {
-                    "CommandTPA.tpa"
-                };
-            }
-        }
+        public AllowedCaller AllowedCaller => AllowedCaller.Player;
 
-        public AllowedCaller AllowedCaller
-        {
-            get
-            {
-                return AllowedCaller.Player;
-            }
-        }
+        public string Name => "tpa";
 
-        public bool RunFromConsole
-        {
-            get
-            {
-                return false;
-            }
-        }
+        public string Syntax => "tpa (player/accept/deny/ignore)";
 
-        public string Name
-        {
-            get
-            {
-                return "tpa";
-            }
-        }
+        public string Help => "Request a teleport to a player, accept or deny other requests.";
 
-        public string Syntax
-        {
-            get
-            {
-                return "tpa (player/accept/deny/ignore)";
-            }
-        }
-
-        public string Help
-        {
-            get
-            {
-                return "Request a teleport to a player, accept or deny other requests.";
-            }
-        }
-
-        public List<string> Aliases
-        {
-            get
-            {
-                return new List<string>();
-            }
-        }
+        public List<string> Aliases => new List<string>();
 
         #endregion
 
@@ -128,6 +73,12 @@ namespace RocketMod_TPA
                         UnturnedChat.Say(teleporter, PluginTPA.Instance.Translate("YouInCar"), Color.red);
                         UnturnedChat.Say(caller, PluginTPA.Instance.Translate("PlayerInCar"), Color.red);
                         requests.Remove(player.CSteamID);
+                        return;
+                    }
+
+                    if(((UnturnedPlayer)caller).Stance == EPlayerStance.PRONE)
+                    {
+                        UnturnedChat.Say(caller, PluginTPA.Instance.Translate("prone"));
                         return;
                     }
 
@@ -215,6 +166,12 @@ namespace RocketMod_TPA
             if (requestTo == null)
             {
                 UnturnedChat.Say(caller, PluginTPA.Instance.Translate("playerNotFound"), Color.red);
+                return;
+            }
+
+            if(requestTo.CSteamID.m_SteamID == ((UnturnedPlayer)caller).CSteamID.m_SteamID)
+            {
+                UnturnedChat.Say(caller, PluginTPA.Instance.Translate("abuse"));
                 return;
             }
 
