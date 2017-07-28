@@ -46,7 +46,9 @@ namespace RocketMod_TPA
                     { "request_pending", "You already have a request pending to this player." },
                     { "request_none", "You have no requests available!" },
                     { "request_abort", "You have aborted your TPA request." }, //New
-                    { "translation_version_dont_edit", "3" }
+                    { "translation_version_dont_edit", "3" },
+                    { "abuse", "You cannot teleport to yourself to prevent abuse." },
+                    { "prone", "You cannot accept teleports while proned to prevent abuse." }
                 };
             }
         }
