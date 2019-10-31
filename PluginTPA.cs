@@ -9,7 +9,7 @@ namespace RocketMod_TPA
 {
     public class PluginTPA : RocketPlugin<TPAConfiguration>
     {
-        public static string version = "1.7.0.2";
+        public static string version = "1.7.0.3";
         public static PluginTPA Instance;
 
         public override TranslationList DefaultTranslations

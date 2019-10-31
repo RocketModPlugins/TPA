@@ -15,8 +15,8 @@ namespace RocketMod_TPA
     {
         #region Declarations
         public static Dictionary<CSteamID, CSteamID> requests = new Dictionary<CSteamID, CSteamID>();
-        private Dictionary<CSteamID, DateTime> coolDown = new Dictionary<CSteamID, DateTime>();
-        private Dictionary<CSteamID, byte> health = new Dictionary<CSteamID, byte>();
+        public Dictionary<CSteamID, DateTime> coolDown = new Dictionary<CSteamID, DateTime>();
+        public Dictionary<CSteamID, byte> health = new Dictionary<CSteamID, byte>();
 
         public bool AllowFromConsole
         {
